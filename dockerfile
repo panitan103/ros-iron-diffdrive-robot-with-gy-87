@@ -15,11 +15,14 @@ RUN colcon build
 WORKDIR /ros2_ws/src
 RUN . /opt/ros/iron/setup.sh && \
     ros2 pkg create --build-type ament_python py_pubsub
-COPY pub_sub/* py_pubsub/py_pubsub
+COPY pub_sub/script/* py_pubsub/py_pubsub
+COPY pub_sub/setup.py py_pubsub
+
 WORKDIR /ros2_ws
 RUN . /opt/ros/iron/setup.sh && \
     rosdep install -i --from-path src --rosdistro iron -y && \
     colcon build --packages-select py_pubsub
+    
 
 COPY ros_entrypoint.sh .
 
