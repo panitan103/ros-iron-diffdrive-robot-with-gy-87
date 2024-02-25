@@ -15,8 +15,8 @@ RUN colcon build
 WORKDIR /ros2_ws/src
 RUN . /opt/ros/iron/setup.sh && \
     ros2 pkg create --build-type ament_python py_pubsub
-COPY pub_sub/script/* py_pubsub/py_pubsub
-COPY pub_sub/setup.py py_pubsub
+COPY py_pubsub/py_pubsub py_pubsub/py_pubsub
+COPY py_pubsub/setup.py py_pubsub/setup.py
 
 WORKDIR /ros2_ws
 RUN . /opt/ros/iron/setup.sh && \
