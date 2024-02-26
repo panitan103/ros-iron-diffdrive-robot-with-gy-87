@@ -1,9 +1,9 @@
 import smbus
-from HMC5883L import HMC5883L
-from MPU6050 import mpu6050
-from BMP085 import BMP085
+from .HMC5883L import HMC5883L
+from .MPU6050 import mpu6050
+from .BMP085 import BMP085
 
-class GY87:
+class GY87_module:
     def __init__(self,mpu_address=0x68,hmc_address=0x1E,bmp_address=0x77 , bus=1):
         self.bus = smbus.SMBus(bus)
         self.mpu = mpu6050(mpu_address)
@@ -29,5 +29,5 @@ class GY87:
             print("")
 
 if __name__ == "__main__":
-    gy87=GY87()
+    gy87=GY87_module()
     gy87.main()

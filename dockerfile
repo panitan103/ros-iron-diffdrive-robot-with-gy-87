@@ -4,8 +4,9 @@ SHELL ["/bin/bash", "-c"]
 
 # WORKDIR /app
 
-# RUN apt-get update &&  apt-get install -y  \
-#     apt-get install ros-{ros-version}-demo-nodes-cpp 
+RUN apt-get update &&  apt-get install -y  \
+    python3-smbus \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p ros2_ws/src
 
@@ -14,14 +15,14 @@ RUN colcon build
 
 WORKDIR /ros2_ws/src
 RUN . /opt/ros/iron/setup.sh && \
-    ros2 pkg create --build-type ament_python py_pubsub \
+    ros2 pkg create --build-type ament_python py_pubsub && \
     ros2 pkg create --build-type ament_python gy_87
 
 COPY py_pubsub/py_pubsub py_pubsub/py_pubsub
 COPY py_pubsub/setup.py py_pubsub/setup.py
 
 COPY gy_87/gy_87 gy_87/gy_87
-# COPY gy_87/setup.py gy_87/setup.py
+COPY gy_87/setup.py gy_87/setup.py
 
 WORKDIR /ros2_ws
 RUN . /opt/ros/iron/setup.sh && \

@@ -1,11 +1,15 @@
-from setuptools import find_packages, setup
+from setuptools import setup
 
-package_name = 'py_pubsub'
+package_name = 'gy_87'
+submodules = "gy_87/gy_87_module"
+
 
 setup(
     name=package_name,
     version='0.0.0',
-    packages=find_packages(exclude=['test']),
+    # packages=find_packages(exclude=['test']),
+    packages=[package_name, submodules],
+
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
@@ -20,8 +24,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'talker = py_pubsub.publisher_member_function:main',
-            'listener = py_pubsub.subscriber_member_function:main',
+            'gy_87 = gy_87.GY87_ros:main',
         ],
     },
 )
