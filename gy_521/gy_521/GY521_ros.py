@@ -7,7 +7,7 @@ from rclpy.clock import ROSClock
 
 
 
-from .gy_87_module.GY87 import GY87_module
+from .gy_521_module.GY521 import GY521_module
 
 class GY87_Publisher(Node):
 
@@ -20,7 +20,7 @@ class GY87_Publisher(Node):
         self.mag_msg=MagneticField()
 
         timer_period = 0  # seconds
-        self.gy87 = GY87_module()
+        self.gy87 = GY521_module()
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
     def timer_callback(self):
@@ -54,14 +54,14 @@ class GY87_Publisher(Node):
 def main(args=None):
     rclpy.init(args=args)
 
-    gy87_publisher = GY87_Publisher()
+    gy521_publisher = GY87_Publisher()
 
-    rclpy.spin(gy87_publisher)
+    rclpy.spin(gy521_publisher)
 
     # Destroy the node explicitly
     # (optional - otherwise it will be done automatically
     # when the garbage collector destroys the node object)
-    gy87_publisher.destroy_node()
+    gy521_publisher.destroy_node()
     rclpy.shutdown()
 
 

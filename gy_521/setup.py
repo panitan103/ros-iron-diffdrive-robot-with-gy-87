@@ -1,7 +1,7 @@
 from setuptools import setup
 
-package_name = 'gy_87'
-submodules = "gy_87/gy_87_module"
+package_name = 'gy_521'
+submodules = "gy_521/gy_521_module"
 
 
 setup(
@@ -24,7 +24,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'gy_87 = gy_87.GY87_ros:main',
+            'gy_521 = gy_521.GY521_ros:main',
         ],
     },
 )
