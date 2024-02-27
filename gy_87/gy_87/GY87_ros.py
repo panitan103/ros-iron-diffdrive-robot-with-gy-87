@@ -33,7 +33,7 @@ class GY87_Publisher(Node):
         print(f"Temperature ={temp:.2f}°C")
         print(f"Magnetrometer: X={mag['x']:.2f}µT, Y={mag['y']:.2f}µT, Z={mag['z']:.2f}µT")
         print(f"Pressure= {pressure:.2f}hPa")
-        print("")/home/panitan103/docker/ros-iron-diffdrive-robot-with-mpu6050/py_pubsub
+        print("")
 
         self.imu_msg.header.stamp = self.get_clock().now().to_msg()
         self.imu_msg.linear_acceleration.x = accel['x']
