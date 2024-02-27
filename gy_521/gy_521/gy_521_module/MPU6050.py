@@ -2,7 +2,7 @@
 
 import smbus
 import time
-
+from math import radians
 class mpu6050:
 
     # Global Variables
@@ -58,8 +58,9 @@ class mpu6050:
     GYRO_CONFIG = 0x1B
     MPU_CONFIG = 0x1A
 
-    RA_USER_CTRL=0x6A
-    RA_INT_PIN_CFG=0x37
+    MPU6050_RA_USER_CTRL=0x6A
+    MPU6050_RA_INT_PIN_CFG=0x37
+    MPU6050_RA_PWR_MGMT_1=0x6B
 
     def __init__(self, address=0x68, bus=1):
         self.address = address
@@ -115,7 +116,7 @@ class mpu6050:
         pre-defined range is advised.
         """
         # First change it to 0x00 to make sure we write the correct value later
-        self.bus.write_byte_data(self.address, self.ACCEL_CONFIG, 0x01)
+        self.bus.write_byte_data(self.address, self.ACCEL_CONFIG, 0x00)
 
         # Write the new range to the ACCEL_CONFIG register
         self.bus.write_byte_data(self.address, self.ACCEL_CONFIG, accel_range)
@@ -249,15 +250,15 @@ class mpu6050:
             print("Unkown range - gyro_scale_modifier set to self.GYRO_SCALE_MODIFIER_250DEG")
             gyro_scale_modifier = self.GYRO_SCALE_MODIFIER_250DEG
 
-        x = x / gyro_scale_modifier
-        y = y / gyro_scale_modifier
-        z = z / gyro_scale_modifier
+        x = radians(x / gyro_scale_modifier)
+        y = radians(y / gyro_scale_modifier)
+        z = radians(z / gyro_scale_modifier)
 
         return {'x': x, 'y': y, 'z': z}
     def bypass_i2c(self):
-        self.bus.write_byte_data(self.address, self.RA_INT_PIN_CFG, 0x02)
-        self.bus.write_byte_data(self.address, self.RA_USER_CTRL, 0x00)
-        self.bus.write_byte_data(self.address, self.PWR_MGMT_1, 0x00)
+        self.bus.write_byte_data(self.address, self.MPU6050_RA_INT_PIN_CFG, 0x02)
+        self.bus.write_byte_data(self.address, self.MPU6050_RA_USER_CTRL, 0x00)
+        self.bus.write_byte_data(self.address, self.MPU6050_RA_PWR_MGMT_1, 0x00)
 
     def get_all_data(self):
         """Reads and returns all the available data."""
@@ -269,12 +270,12 @@ class mpu6050:
     def main(self):
         mpu = mpu6050(0x68)
         while True:
-            # print(mpu.read_i2c_word_all(0x6B))
+            # print(mpu.read_i2c_word_all(100))
             [accel, gyro, temp] = mpu.get_all_data()
 
 
             print(f"Acceleration: X={accel['x']:.2f}g, Y={accel['y']:.2f}g, Z={accel['z']:.2f}g")
-            print(f"Rotation: X={gyro['x']:.2f}°/s, Y={gyro['y']:.2f}°/s, Z={gyro['z']:.2f}°/s")
+            print(f"Rotation: X={gyro['x']:.2f}rad/s, Y={gyro['y']:.2f}rad/s, Z={gyro['z']:.2f}rad/s")
             print(f"Temperature ={temp:.2f}°C")
             time.sleep(0.1)
 
