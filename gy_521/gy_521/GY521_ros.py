@@ -21,7 +21,7 @@ class GY521_Publisher(Node):
         # Replace the following lines with the appropriate code to read data from GY87.py
 
         [accel, gyro, temp]=self.gy87.get_all_data()
-        print(f"Acceleration: X={accel['x']:.2f}g, Y={accel['y']:.2f}g, Z={accel['z']:.2f}g")
+        print(f"Acceleration: X={accel['x']:.2f}m/s², Y={accel['y']:.2f}m/s², Z={accel['z']:.2f}m/s²")
         print(f"Rotation: X={gyro['x']:.2f}rad/s, Y={gyro['y']:.2f}rad/s, Z={gyro['z']:.2f}rad/s")
         print(f"Temperature ={temp:.2f}°C")
         print("")
