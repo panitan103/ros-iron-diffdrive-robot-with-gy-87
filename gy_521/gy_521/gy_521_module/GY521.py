@@ -2,7 +2,7 @@ import smbus
 from .MPU6050 import mpu6050
 import time
 
-class GY512:
+class GY521_module:
     def __init__(self,mpu_address=0x68,hmc_address=0x1E,bmp_address=0x77 , bus=1):
         self.bus = smbus.SMBus(bus)
         self.mpu = mpu6050(mpu_address)

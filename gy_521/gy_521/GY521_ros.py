@@ -17,10 +17,10 @@ class GY521_Publisher(Node):
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
     def timer_callback(self):
-         # Read data from GY87.py
-        # Replace the following lines with the appropriate code to read data from GY87.py
+         # Read data from GY521.py
+        # Replace the following lines with the appropriate code to read data from GY521.py
 
-        [accel, gyro, temp]=self.gy87.get_all_data()
+        [accel, gyro, temp]=self.gy521.get_all_data()
         print(f"Acceleration: X={accel['x']:.2f}m/s², Y={accel['y']:.2f}m/s², Z={accel['z']:.2f}m/s²")
         print(f"Rotation: X={gyro['x']:.2f}rad/s, Y={gyro['y']:.2f}rad/s, Z={gyro['z']:.2f}rad/s")
         print(f"Temperature ={temp:.2f}°C")
