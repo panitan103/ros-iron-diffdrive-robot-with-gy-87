@@ -8,7 +8,7 @@ class GY521_Publisher(Node):
 
     def __init__(self):
         super().__init__('minimal_publisher')
-        self.publisher_imu = self.create_publisher(Imu,'/imu_data', 10)
+        self.publisher_imu = self.create_publisher(Imu,'/imu/data_raw', 10)
 
         self.imu_msg = Imu()
 
@@ -27,6 +27,7 @@ class GY521_Publisher(Node):
         print("")
 
         self.imu_msg.header.stamp = self.get_clock().now().to_msg()
+        self.imu_msg.header.frame_id="imu"
         self.imu_msg.linear_acceleration.x = accel['x']
         self.imu_msg.linear_acceleration.y = accel['y']
         self.imu_msg.linear_acceleration.z = accel['z']
