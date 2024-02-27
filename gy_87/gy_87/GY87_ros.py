@@ -19,7 +19,7 @@ class GY87_Publisher(Node):
         self.imu_msg = Imu()
         self.mag_msg=MagneticField()
 
-        timer_period = 0  # seconds
+        timer_period = 0.1  # seconds
         self.gy87 = GY87_module()
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
