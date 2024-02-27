@@ -35,7 +35,7 @@ class GY87_Publisher(Node):
         print(f"Pressure= {pressure:.2f}hPa")
         print("")
 
-        self.imu_msg.header.stamp = self.ros_clock.now().to_msg()
+        self.imu_msg.header.stamp = self.get_clock().now().to_msg()
         self.imu_msg.linear_acceleration.x = accel['x']
         self.imu_msg.linear_acceleration.y = accel['y']
         self.imu_msg.linear_acceleration.z = accel['z']
@@ -43,7 +43,7 @@ class GY87_Publisher(Node):
         self.imu_msg.angular_velocity.y = gyro['y']
         self.imu_msg.angular_velocity.z = gyro['z']
 
-        self.mag_msg.header.stamp = self.ros_clock.now().to_msg()
+        self.mag_msg.header.stamp = self.get_clock().now().to_msg()
         self.mag_msg.magnetic_field.x = mag['x']
         self.mag_msg.magnetic_field.y = mag['y']
         self.mag_msg.magnetic_field.z = mag['z']
