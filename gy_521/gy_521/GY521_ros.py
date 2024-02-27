@@ -12,7 +12,7 @@ class GY521_Publisher(Node):
 
         self.imu_msg = Imu()
 
-        timer_period = 0  # seconds
+        timer_period = 0.1  # seconds
         self.gy521 = GY521_module()
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
