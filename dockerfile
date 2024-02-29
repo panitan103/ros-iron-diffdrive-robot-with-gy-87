@@ -1,13 +1,13 @@
-FROM ros:iron
+FROM ros-iron-molly:desktop
 SHELL ["/bin/bash", "-c"]
 
 
 # WORKDIR /app
 
-RUN apt-get update &&  apt-get install -y  \
-    python3-smbus \
-    && rm -rf /var/lib/apt/lists/*
-
+#RUN apt-get update &&  apt-get install -y  \
+#    python3-smbus \
+#    && rm -rf /var/lib/apt/lists/*
+RUN pip install smbus
 RUN mkdir -p ros2_ws/src
 
 WORKDIR /ros2_ws
